@@ -95,4 +95,3 @@ ggplot(five_countries,
        x = "Year",
        y = "Gold Medals")
 
-
