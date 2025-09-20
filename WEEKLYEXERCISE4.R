@@ -55,3 +55,43 @@ total_medals_by_year <- olympics2 %>%
 total_medals_by_year
 
 # saving, committing, and pushing changes
+
+# returning to main branch
+
+# Step 7
+
+# a. Which countries had the largest delegation of athletes in 1992? Create a 
+# tibble that contains only the variables country and athletes. (2pts) 
+
+top_athlete_counts_92 <- olympics %>%
+  filter(year == "1992") %>%
+  arrange(desc(athletes)) %>%
+  subset(select = c(country, athletes))
+
+top_athlete_counts_92
+
+# The top five countries sending the most athletes in 1992 were the U.S., Unified
+# Team (Former Soviet), Germany, Canada, and France.
+
+# b. For the following five countries, plot the number of gold medals earned 
+# over time: United States, France, Germany, Russia, and China. (4pts) 
+
+five_countries <- olympics %>%
+  filter(
+    # going over country vector and keeping relevant observations
+    str_detect(country, "United|France|Germany|Russia|China"))
+
+five_countries
+
+# creating graph
+ggplot(five_countries, 
+       aes(
+         x = factor(year), # formatting year as a factor variable
+         y = gold, 
+         fill = country)) + # color coding by country
+  geom_col(
+    position = "dodge") +  # clusters bars around the year they apply to
+  labs(title = "Gold Medals Over Time by Country",
+       x = "Year",
+       y = "Gold Medals")
+
